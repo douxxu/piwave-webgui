@@ -30,6 +30,10 @@ else
   echo "Directory $CLONE_DIR already exists. Skipping creation."
 fi
 
+echo "Installing Flask..."
+sudo pip install flask --break-system-packages
+check_status "Installing PiWave"
+
 echo "Cloning PiWave WebGUI repository into $CLONE_DIR..."
 git clone "$REPO_URL" "$CLONE_DIR"
 check_status "Cloning PiWave WebGUI repository"

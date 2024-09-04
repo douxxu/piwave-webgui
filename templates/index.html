@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PiWave Music Player</title>
+    <link rel="icon" type="image/png" href="/static/images/logo.png">
+    <style>
+        body {
+            background-color: #1c1c1c;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #2e2e2e;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 2px solid #a371d8;
+        }
+        header img {
+            height: 50px;
+        }
+        header a {
+            color: #a371d8;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        .main-title {
+            text-align: center;
+            padding: 20px;
+            font-size: 36px;
+            color: #a371d8;
+            margin-top: 0;
+        }
+
+        .description {
+            text-align: center;
+            padding: 20px;
+            font-size: 18px;
+            color: #e0e0e0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .box {
+            background-color: #2e2e2e;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            width: 80%;
+            max-width: 600px;
+            color: #e0e0e0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .box h2 {
+            color: #a371d8;
+            margin-top: 0;
+        }
+        .box button {
+            padding: 10px 15px;
+            background-color: #a371d8;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .box button:hover {
+            background-color: #925bcc;
+        }
+        .box input[type="file"] {
+            display: none;
+        }
+        .box label {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #a371d8;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-align: center;
+            transition: background-color 0.3s ease;
+        }
+        .box label:hover {
+            background-color: #925bcc;
+        }
+
+        #music-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        #music-list li {
+            background-color: #3a3a3a;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 5px 0;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        #music-list li .options {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+            padding-top: 10px;
+        }
+        #music-list li.expanded .options {
+            max-height: 100px;
+            opacity: 1;
+        }
+        #music-list li .options button {
+            margin-right: 10px;
+        }
+
+        .notification-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .notification {
+            background-color: #4caf50;
+            color: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        .notification.error {
+            background-color: #f44336;
+        }
+        .notification.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="/static/images/logo.png" alt="PiWave Logo">
+        <a href="https://github.com/douxxu/piwave-webgui" target="_blank">GitHub</a>
+    </header>
+
+    <div class="main-title">
+        PiWave Music Player
+    </div>
+
+    <div class="description">
+        Welcome to the PiWave Web Gui. 
+        <br>
+        Here you can upload new MP3 files, view and play your music collection, and control playback directly from this interface.
+    </div>
+
+    <div class="container">
+        <div class="box">
+            <h2>Play a File</h2>
+            <ul id="music-list">
+            </ul>
+        </div>
+
+        <div class="box">
+            <h2>Upload a File</h2>
+            <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+                <label for="file-upload">Select a file</label>
+                <input type="file" id="file-upload" name="file" accept=".mp3">
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+
+        <div class="box">
+            <h2>Current Configuration</h2>
+            <pre id="config-display"></pre>
+        </div>
+    </div>
+
+    <div class="notification-container" id="notification-container"></div>
+
+    <script>
+        function fetchFiles() {
+            fetch('/files')
+                .then(response => response.json())
+                .then(data => {
+                    const musicList = document.getElementById('music-list');
+                    musicList.innerHTML = ''; 
+                    data.files.forEach(file => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = file;
+                        listItem.innerHTML += `
+                            <div class="options">
+                                <button onclick="play('${file}')">Play</button>
+                                <button onclick="stop()">Stop</button>
+                            </div>
+                        `;
+                        listItem.addEventListener('click', function() {
+                            const wasExpanded = this.classList.contains('expanded');
+                            document.querySelectorAll('#music-list li').forEach(li => li.classList.remove('expanded'));
+                            if (!wasExpanded) {
+                                this.classList.add('expanded');
+                            }
+                        });
+                        musicList.appendChild(listItem);
+                    });
+                })
+                .catch(error => {
+                    console.error('Failed to load files:', error);
+                });
+        }
+
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    showNotification('File uploaded successfully', 'success');
+                    fetchFiles();
+                } else {
+                    showNotification(data.message, 'error');
+                }
+            })
+            .catch(error => {
+                showNotification('Failed to upload the file', 'error');
+            });
+        });
+
+        function play(filename) {
+            fetch(`/play/${encodeURIComponent(filename)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showNotification(`Playing ${filename}`, 'success');
+                    } else {
+                        showNotification(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    showNotification('Failed to play the file', 'error');
+                });
+        }
+
+        function stop() {
+            fetch('/stop')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        showNotification('Playback stopped', 'success');
+                    } else {
+                        showNotification(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    showNotification('Failed to stop playback', 'error');
+                });
+        }
+
+        function showNotification(message, type) {
+            const notificationContainer = document.getElementById('notification-container');
+            const notification = document.createElement('div');
+            notification.classList.add('notification', 'show');
+            if (type === 'error') {
+                notification.classList.add('error');
+            }
+            notification.innerText = message;
+            notificationContainer.appendChild(notification);
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => notification.remove(), 500);
+            }, 3000);
+        }
+
+        function loadConfig() {
+            fetch('/config')
+                .then(response => response.json())
+                .then(data => {
+                    const configDisplay = document.getElementById('config-display');
+                    configDisplay.textContent = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    document.getElementById('config-display').textContent = 'Failed to load configuration';
+                });
+        }
+
+        fetchFiles();
+        loadConfig();
+    </script>
+</body>
+</html>

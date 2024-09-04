@@ -2,7 +2,7 @@
 
 <div align=center>
 
-![PiWave WebGUI image](https://piwave.hs.vc/piwave.png)
+![PiWave WebGUI image](https://piwave.hs.vc/static/img/logo.png)
 
 </div>
 

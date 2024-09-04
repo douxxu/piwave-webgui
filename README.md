@@ -1,7 +1,3 @@
-Certainly! Here’s the README for "PiWave WebGUI" in English:
-
----
-
 # 🌐 PiWave WebGUI
 
 <div align=center>

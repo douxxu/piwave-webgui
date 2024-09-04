@@ -22,7 +22,7 @@
 For a complete installation of PiWave WebGUI with PiWave included, use the auto-install script:
 
 ```bash
-curl -sSL https://piwave.hs.vc/setup-gui-full | sudo bash
+curl -sSL https://piwave.hs.vc/setup/gui/full/ | sudo bash
 ```
 
 This script will install both PiWave WebGUI and PiWave, setting up the necessary dependencies and preparing your environment for immediate use.
@@ -32,7 +32,7 @@ This script will install both PiWave WebGUI and PiWave, setting up the necessary
 If you already have PiWave installed and configured, you can install only PiWave WebGUI using the dedicated installation script:
 
 ```bash
-curl -sSL https://piwave.hs.vc/setup-gui | sudo bash
+curl -sSL https://piwave.hs.vc/setup/gui | sudo bash
 ```
 
 This script will install PiWave WebGUI and the required dependencies to work with your existing PiWave setup.

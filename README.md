@@ -16,7 +16,14 @@
 - **Notifications**: Receive real-time notifications for actions like file uploads and audio playback.
 
 ## Installation
-
+  
+> [!WARNING]
+> **Warning**: Using PiWave involves broadcasting signals which may be subject to local regulations and laws. It is your responsibility to ensure that your use of PiWave complies with all applicable legal requirements and regulations in your area. Unauthorized use of broadcasting equipment may result in legal consequences, including fines or penalties.
+>
+> **Liability**: The author of PiWave is not responsible for any damage, loss, or legal issues that may arise from the use of this software. By using PiWave, you agree to accept all risks and liabilities associated with its operation and broadcasting capabilities.
+>
+> Please exercise caution and ensure you have the proper permissions and knowledge of the regulations before using PiWave for broadcasting purposes.
+  
 ### Method 1: Full Install (with PiWave included)
 
 For a complete installation of PiWave WebGUI with PiWave included, use the auto-install script:

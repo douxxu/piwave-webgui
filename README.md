@@ -29,7 +29,7 @@
 For a complete installation of PiWave WebGUI with PiWave included, use the auto-install script:
 
 ```bash
-curl -sL https://piwave.hs.vc/setup/gui/full/ | sudo bash
+curl -sL https://setup.piwave.xyz/gui/full/ | sudo bash
 ```
 
 This script will install both PiWave WebGUI and PiWave, setting up the necessary dependencies and preparing your environment for immediate use.
@@ -39,7 +39,7 @@ This script will install both PiWave WebGUI and PiWave, setting up the necessary
 If you already have PiWave installed and configured, you can install only PiWave WebGUI using the dedicated installation script:
 
 ```bash
-curl -sL https://piwave.hs.vc/setup/gui/ | sudo bash
+curl -sL https://setup.piwave.xyz/gui/ | sudo bash
 ```
 
 This script will install PiWave WebGUI and the required dependencies to work with your existing PiWave setup.
@@ -47,7 +47,8 @@ This script will install PiWave WebGUI and the required dependencies to work wit
 ## Usage
 
 1. **Start the Flask Server**: Run the Flask server to start the web interface.
-   
+   >[!NOTE]
+   >You must be running this as root user.
    ```bash
    sudo python3 $HOME/piwave-webgui/server.py
    ```
@@ -58,7 +59,7 @@ This script will install PiWave WebGUI and the required dependencies to work wit
 
 > [!NOTE]
 > You can edit the configuration file `piwave.conf` to edit the piwave instance  
-> Use `pw-webgui-config` to open the file
+> Use `pw-webgui-config` as root user to open the file
 
 2. **Access the WebGUI**: Open your browser and navigate to `http://<your-raspberry-pi-ip>` to access the PiWave WebGUI.
 

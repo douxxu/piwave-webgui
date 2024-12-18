@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# github.com/PiWave-fm | github.com/douxxu
+# github.com/douxxu | git.douxx.tech/piwave-webgui
 print_magenta() {
   echo -e "\e[35m$1\e[0m"
 }
@@ -53,7 +53,7 @@ else
     exit 1
 fi
 
-echo "Setup ended. You can now use the following commands:"
+echo "Setup ended. You can now use the following commands AS ROOT:"
 echo "  - pw-webgui: Start the PiWave WebGUI server."
 echo "  - pw-webgui-config: Edit the PiWave configuration file."
 

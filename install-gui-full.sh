@@ -35,6 +35,10 @@ echo "Cloning PiWave WebGUI repository into $CLONE_DIR..."
 git clone "$REPO_URL" "$CLONE_DIR"
 check_status "Cloning PiWave WebGUI repository"
 
+echo "Installing Flask..."
+sudo apt install python3-flask
+check_status "Installing PiWave"
+
 echo "Creating aliases in .bashrc..."
 
 if [ -f "$HOME/.bashrc" ]; then

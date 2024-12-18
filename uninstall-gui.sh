@@ -42,7 +42,7 @@ else
 fi
 
 echo "Uninstalling Flask..."
-sudo pip uninstall -y flask
+sudo apt remove -y python3-flask
 check_status "Uninstalling Flask"
 
 echo "Uninstallation completed successfully!"

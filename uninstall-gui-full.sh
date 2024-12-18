@@ -46,7 +46,7 @@ sudo pip uninstall -y flask
 check_status "Uninstalling Flask"
 
 echo "Removing setup PiWave..."
-curl -sSL https://piwave.hs.vc/uninstall/ | sudo bash
+curl -sSL https://setup.piwave.xyz/uninstall/ | sudo bash
 check_status "Running PiWave uninstall script"
 
 echo "Uninstallation completed successfully!"

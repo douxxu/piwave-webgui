@@ -36,7 +36,7 @@ git clone "$REPO_URL" "$CLONE_DIR"
 check_status "Cloning PiWave WebGUI repository"
 
 echo "Installing Flask..."
-sudo apt install python3-flask
+sudo apt install -y python3-flask
 check_status "Installing PiWave"
 
 echo "Creating aliases in .bashrc..."

@@ -21,7 +21,7 @@ print_magenta "
 "
 
 echo "Running PiWave setup..."
-curl -sSL https://piwave.hs.vc/setup/ | sudo bash
+curl -sSL https://setup.piwave.xyz | sudo bash
 check_status "Running PiWave setup"
 
 CLONE_DIR="$HOME/piwave-webgui"

@@ -32,7 +32,7 @@ else
 fi
 
 echo "Installing Flask..."
-sudo pip install flask --break-system-packages
+sudo apt install python3-flask
 check_status "Installing PiWave"
 
 echo "Cloning PiWave WebGUI repository into $CLONE_DIR..."

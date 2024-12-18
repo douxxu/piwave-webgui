@@ -2,7 +2,7 @@
 
 <div align=center>
 
-![PiWave WebGUI image](https://piwave.hs.vc/static/img/logo.png)
+![PiWave WebGUI image](https://piwave.xyz/static/img/logo.png)
 
 </div>
 
@@ -23,7 +23,7 @@
 > **Liability**: The author of PiWave is not responsible for any damage, loss, or legal issues that may arise from the use of this software. By using PiWave, you agree to accept all risks and liabilities associated with its operation and broadcasting capabilities.
 >
 > Please exercise caution and ensure you have the proper permissions and knowledge of the regulations before using PiWave for broadcasting purposes.
-  
+
 ### Method 1: Full Install (with PiWave included)
 
 For a complete installation of PiWave WebGUI with PiWave included, use the auto-install script:
@@ -34,6 +34,12 @@ curl -sL https://setup.piwave.xyz/gui/full/ | sudo bash
 
 This script will install both PiWave WebGUI and PiWave, setting up the necessary dependencies and preparing your environment for immediate use.
 
+>[!NOTE]
+>To uninstall full webgui, do the following command:
+>```bash
+>curl -sL https://setup.piwave.xyz/gui/full/uninstall | sudo bash
+>```
+
 ### Method 2: WebGUI Install (PiWave must already be installed)
 
 If you already have PiWave installed and configured, you can install only PiWave WebGUI using the dedicated installation script:
@@ -43,6 +49,12 @@ curl -sL https://setup.piwave.xyz/gui/ | sudo bash
 ```
 
 This script will install PiWave WebGUI and the required dependencies to work with your existing PiWave setup.
+
+>[!NOTE]
+>To uninstall full webgui, do the following command:
+>```bash
+>curl -sL https://setup.piwave.xyz/gui/uninstall | sudo bash
+>```
 
 ## Usage
 

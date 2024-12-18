@@ -42,7 +42,7 @@ else
 fi
 
 echo "Uninstalling Flask..."
-sudo apt remove -y flask
+sudo apt remove -y python3-flask
 check_status "Uninstalling Flask"
 
 echo "Removing setup PiWave..."

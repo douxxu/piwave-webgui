@@ -49,7 +49,7 @@ else
     exit 1
 fi
 
-echo "Setup ended. You can now use the following commands:"
+echo "Setup ended. You can now use the following commands AS ROOT:"
 echo "  - pw-webgui: Start the PiWave WebGUI server."
 echo "  - pw-webgui-config: Edit the PiWave configuration file."
 
